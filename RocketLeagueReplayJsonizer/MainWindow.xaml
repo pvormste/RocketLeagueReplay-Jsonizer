@@ -1,12 +1,18 @@
-﻿<Window x:Class="RocketLeagueReplayJsonizer.MainWindow"
+﻿<Controls:MetroWindow x:Class="RocketLeagueReplayJsonizer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RocketLeagueReplayJsonizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Rocket League Replay - Jsonizer"
+        Height="550" 
+        Width="620"
+                      
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1">
     <Grid>
         
     </Grid>
-</Window>
+</Controls:MetroWindow>
