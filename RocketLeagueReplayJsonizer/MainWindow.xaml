@@ -9,10 +9,44 @@
         Title="Rocket League Replay - Jsonizer"
         Height="550" 
         Width="620"
+        ShowMinButton="False"
+        ShowMaxRestoreButton="False"              
                       
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1">
-    <Grid>
-        
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                         Visual="{StaticResource appbar_information_circle}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="info" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Grid Background="#FF252525">
+        <TextBox x:Name="txtBoxJSON" HorizontalAlignment="Left" Height="183" Margin="10,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="590"/>
+        <Label x:Name="label" Content="JSON-Output:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="102" Height="25" />
+        <TextBox x:Name="txtBoxFileName" HorizontalAlignment="Left" Height="35
+                 " Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="474" FontSize="18.667"/>
+        <Button x:Name="btnFileDlg" Content="Open Replay" HorizontalAlignment="Left" Margin="489,164,0,0" VerticalAlignment="Top" Width="111" Height="35
+                " FontSize="12" Click="btnFileDlg_Click"/>
+        <Label x:Name="label1" Content="Choose your replay:" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Replay from:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCreatedAt" Content="" HorizontalAlignment="Left" Margin="86,209,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSaveFile" Content="Save File" HorizontalAlignment="Left" Margin="336,475,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnSaveFile_Click"/>
+        <Button x:Name="btnCopyToClipboard" Content="Copy to Clipboard" HorizontalAlignment="Left" Margin="480,475,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnCopyToClipboard_Click"/>
+        <Label x:Name="lblSaved" Content="" HorizontalAlignment="Left" Margin="10,481,0,0" VerticalAlignment="Top" Foreground="#FF59C51B"/>
+        <CheckBox x:Name="chckMatchInfo" Content="Extract match infos only (uncheck not possible / not implemented)" HorizontalAlignment="Left" Margin="11,106,0,0" VerticalAlignment="Top" Width="389" IsChecked="True" IsEnabled="False"/>
+
+
     </Grid>
 </Controls:MetroWindow>
