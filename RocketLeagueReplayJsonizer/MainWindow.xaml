@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Rocket League Replay - Jsonizer"
-        Height="550" 
+        Height="600" 
         Width="620"
         ShowMinButton="False"
         ShowMaxRestoreButton="False"              
@@ -33,19 +33,20 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Background="#FF252525">
-        <TextBox x:Name="txtBoxJSON" HorizontalAlignment="Left" Height="183" Margin="10,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="590"/>
-        <Label x:Name="label" Content="JSON-Output:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="102" Height="25" />
+        <TextBox x:Name="txtBoxJSON" HorizontalAlignment="Left" Height="183" Margin="10,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="590"/>
+        <Label x:Name="label" Content="JSON-Output:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="102" Height="25" />
         <TextBox x:Name="txtBoxFileName" HorizontalAlignment="Left" Height="35
-                 " Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="474" FontSize="18.667"/>
-        <Button x:Name="btnFileDlg" Content="Open Replay" HorizontalAlignment="Left" Margin="489,164,0,0" VerticalAlignment="Top" Width="111" Height="35
+                 " Margin="10,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="474" FontSize="18.667"/>
+        <Button x:Name="btnFileDlg" Content="Open Replay" HorizontalAlignment="Left" Margin="489,198,0,0" VerticalAlignment="Top" Width="111" Height="35
                 " FontSize="12" Click="btnFileDlg_Click"/>
-        <Label x:Name="label1" Content="Choose your replay:" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Replay from:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblCreatedAt" Content="" HorizontalAlignment="Left" Margin="86,209,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSaveFile" Content="Save File" HorizontalAlignment="Left" Margin="336,475,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnSaveFile_Click"/>
-        <Button x:Name="btnCopyToClipboard" Content="Copy to Clipboard" HorizontalAlignment="Left" Margin="480,475,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnCopyToClipboard_Click"/>
-        <Label x:Name="lblSaved" Content="" HorizontalAlignment="Left" Margin="10,481,0,0" VerticalAlignment="Top" Foreground="#FF59C51B"/>
-        <CheckBox x:Name="chckMatchInfo" Content="Extract match infos only (uncheck not possible / not implemented)" HorizontalAlignment="Left" Margin="11,106,0,0" VerticalAlignment="Top" Width="389" IsChecked="True" IsEnabled="False"/>
+        <Label x:Name="label1" Content="Choose your replay:" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Replay Date:" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCreatedAt" Content="" HorizontalAlignment="Left" Margin="86,243,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSaveFile" Content="Save File" HorizontalAlignment="Left" Margin="336,513,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnSaveFile_Click"/>
+        <Button x:Name="btnCopyToClipboard" Content="Copy to Clipboard" HorizontalAlignment="Left" Margin="480,513,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="btnCopyToClipboard_Click"/>
+        <Label x:Name="lblSaved" Content="" HorizontalAlignment="Left" Margin="10,519,0,0" VerticalAlignment="Top" Foreground="#FF59C51B"/>
+        <CheckBox x:Name="chckMatchInfo" Content="Extract match infos only (uncheck not possible / not implemented)" HorizontalAlignment="Left" Margin="11,140,0,0" VerticalAlignment="Top" Width="389" IsChecked="True" IsEnabled="False"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="93" Margin="135,18,0,0" VerticalAlignment="Top" Width="360" Source="Resources/program-logo.png"/>
 
 
     </Grid>
