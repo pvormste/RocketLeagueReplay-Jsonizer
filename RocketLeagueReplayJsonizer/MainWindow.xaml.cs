@@ -35,6 +35,10 @@ namespace RocketLeagueReplayJsonizer {
                 txtBoxFileName.Text = System.IO.Path.GetFileName(fileDlg.FileName);
                 lblCreatedAt.Content = File.GetLastWriteTime(fileDlg.FileName).ToString();
 
+                var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                string JSON = serializer.Serialize(new ReplayJSON(fileDlg.FileName));
+
+                txtBoxJSON.Text = JSON;
             }
 
 
