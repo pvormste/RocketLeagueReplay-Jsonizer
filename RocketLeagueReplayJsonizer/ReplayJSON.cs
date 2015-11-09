@@ -9,11 +9,12 @@ namespace RocketLeagueReplayJsonizer {
     class ReplayJSON {
         const string _version = "RLRJv1";
 
-        public string JSONizer { get { return _version; } }
+        public string ReplayJsonType { get { return _version; } }
         public string ID { get; private set; }
         public string MatchType { get; private set; }
         public string MatchDate { get; private set; }
         public long? MatchLength { get; private set; }
+        public float FramesPerSecond { get; private set; }
         public string Stadium { get; private set; }
         public long? TeamSize { get; private set; }
         public List<Player> MembersTeamBlue { get; private set; }
@@ -27,17 +28,23 @@ namespace RocketLeagueReplayJsonizer {
             ScoreTeamBlue = 0;
             ScoreTeamOrange = 0;
 
+            // Initialize Lists
+            MembersTeamBlue = new List<Player>();
+            MembersTeamOrange = new List<Player>();
+            Goals = new List<Goal>();
+
             // Start to deserialize
             string log = null;
             Replay replay = Replay.Deserialize(path, out log);
-            bool isTeamBlue = true;
+            bool isTeamOrange = false;
 
             foreach(var prop in replay.Properties) {
-                Console.WriteLine(prop.Name + " ("+prop.Type+")");
+                // Debug:
+                //Console.WriteLine(prop.Name + " ("+prop.Type+")");
 
                 switch(prop.Name) {
                     case "PrimaryPlayerTeam":
-                        isTeamBlue = false;
+                        isTeamOrange = true;
                         break;
                     case "Id":
                         ID = prop.StringValue;
@@ -51,6 +58,9 @@ namespace RocketLeagueReplayJsonizer {
                     case "NumFrames":
                         MatchLength = prop.IntValue;
                         break;
+                    case "RecordFPS":
+                        FramesPerSecond = prop.FloatValue;
+                        break;
                     case "MapName":
                         Stadium = prop.StringValue;
                         break;
@@ -58,16 +68,97 @@ namespace RocketLeagueReplayJsonizer {
                         TeamSize = prop.IntValue;
                         break;
                     case "Team0Score":
-                        if (isTeamBlue)
+                        if (isTeamOrange)
                             ScoreTeamBlue = prop.IntValue;
                         else
                             ScoreTeamOrange = prop.IntValue;
                         break;
                     case "Team1Score":
-                        if (isTeamBlue)
+                        if (isTeamOrange)
                             ScoreTeamOrange = prop.IntValue;
                         else
                             ScoreTeamBlue = prop.IntValue;
+                        break;
+                    case "PlayerStats":
+                        
+                        foreach(var propList in prop.ArrayValue) {
+                            Player player = new Player();
+
+                            foreach(var propElement in propList) {
+                                switch(propElement.Name) {
+                                    case "None":
+                                        player = new Player();
+                                        break;
+                                    case "Name":
+                                        player.Name = propElement.StringValue;
+                                        break;
+                                    case "Platform":
+                                        player.Platform = propElement.StringValue.Split(' ')[1];
+                                        break;
+                                    case "OnlineID":
+                                        player.OnlineID = propElement.IntValue;
+                                        break;
+                                    case "Team":
+                                        if (propElement.IntValue == 0) {
+                                            MembersTeamBlue.Add(player);
+                                        }   
+                                        else if (propElement.IntValue == 1) {
+                                            MembersTeamOrange.Add(player);
+                                        }
+                                            
+                                        break;
+                                    case "Score":
+                                        player.Score = propElement.IntValue;
+                                        break;
+                                    case "Goals":
+                                        player.Goals = propElement.IntValue;
+                                        break;
+                                    case "Assists":
+                                        player.Assists = propElement.IntValue;
+                                        break;
+                                    case "Saves":
+                                        player.Saves = propElement.IntValue;
+                                        break;
+                                    case "Shots":
+                                        player.Shots = propElement.IntValue;
+                                        break;
+                                    case "bBot":
+                                        if (propElement.IntValue == 0)
+                                            player.isBot = false;
+                                        else
+                                            player.isBot = true;
+                                        break;
+
+                                }
+                            }
+                        }
+
+                        break;
+                    case "Goals":
+                        foreach (var propList in prop.ArrayValue) {
+                            Goal goal = new Goal();
+
+                            foreach (var propElement in propList) {
+                                switch (propElement.Name) {
+                                    case "None":
+                                        Goals.Add(goal);
+                                        goal = new Goal();
+                                        break;
+                                    case "frame":
+                                        goal.FrameTime = propElement.IntValue;
+                                        break;
+                                    case "PlayerName":
+                                        goal.Scorer = propElement.StringValue;
+                                        break;
+                                    case "PlayerTeam":
+                                        if (propElement.IntValue == 0)
+                                            goal.Team = "blue";
+                                        else if (propElement.IntValue == 1)
+                                            goal.Team = "orange";
+                                        break;
+                                }
+                            }
+                        }
                         break;
                 }
             }
@@ -75,18 +166,21 @@ namespace RocketLeagueReplayJsonizer {
     }
 
     class Player {
-        public string Name { get; private set; }
-        public string Platform { get; private set; }
-        public string OnlineID { get; private set; }
-        public long? Score { get; private set; }
-        public long? Goals { get; private set; }
-        public long? Assists { get; private set; }
-        public long? Saves { get; private set; }
-        public long? Shots { get; private set; }
+        public string Name { get; set; }
+        public string Platform { get; set; }
+        public long? OnlineID { get; set; }
+        public long? Score { get; set; }
+        public long? Goals { get; set; }
+        public long? Assists { get; set; }
+        public long? Saves { get; set; }
+        public long? Shots { get; set; }
+        public bool isBot { get; set; }
     }
 
     class Goal {
-        public long? Time { get; private set; }
-        public string Scorer { get; private set; }
+        public long? FrameTime { get; set; }
+        public string Scorer { get; set; }
+        public string Team { get; set; }
     }
+
 }

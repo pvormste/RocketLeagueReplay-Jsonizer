@@ -47,6 +47,7 @@
         <Label x:Name="lblSaved" Content="" HorizontalAlignment="Left" Margin="10,519,0,0" VerticalAlignment="Top" Foreground="#FF59C51B"/>
         <CheckBox x:Name="chckMatchInfo" Content="Extract match infos only (uncheck not possible / not implemented)" HorizontalAlignment="Left" Margin="11,140,0,0" VerticalAlignment="Top" Width="389" IsChecked="True" IsEnabled="False"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="93" Margin="135,18,0,0" VerticalAlignment="Top" Width="360" Source="Resources/program-logo.png"/>
+        <Button x:Name="btnGenerate" Content="Generate" HorizontalAlignment="Left" Margin="489,279,0,0" VerticalAlignment="Top" Width="111" Background="#FF2F2F2F" Height="32" FontSize="12" Click="btnGenerate_Click"/>
 
 
     </Grid>
