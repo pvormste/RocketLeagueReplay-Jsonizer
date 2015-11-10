@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace RocketLeagueReplayJsonizer {
     /// <summary>
@@ -25,6 +26,7 @@ namespace RocketLeagueReplayJsonizer {
         Microsoft.Win32.FileDialog fileDlg = null;
 
         public MainWindow() {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -62,8 +64,6 @@ namespace RocketLeagueReplayJsonizer {
         }
 
         private void btnGenerate_Click(object sender, RoutedEventArgs e) {
-            txtBoxJSON.Text = "Generating. Please Wait ...";
-
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             string JSON = serializer.Serialize(new ReplayJSON(fileDlg.FileName));
 
@@ -79,6 +79,15 @@ namespace RocketLeagueReplayJsonizer {
                 lblCreatedAt.Content = "";
                 fileDlg = null;
             }
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e) {
+            infoFlyout.IsOpen = !infoFlyout.IsOpen;
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

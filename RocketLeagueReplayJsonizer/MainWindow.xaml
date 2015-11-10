@@ -10,13 +10,14 @@
         Height="600" 
         Width="620"
         ShowMinButton="False"
-        ShowMaxRestoreButton="False"              
+        ShowMaxRestoreButton="False"
+        ShowIconOnTitleBar="True"
                       
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button>
+            <Button x:Name="btnInfo" Click="btnInfo_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
@@ -32,6 +33,61 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="info" Position="right" x:Name="infoFlyout" Width="300">
+                <Grid>
+                    <TextBlock Margin="20,30,0,0" FontWeight="Bold" FontSize="13.333">Version:</TextBlock>
+
+                    <TextBlock Margin="20,55,0,0" FontWeight="Bold" FontSize="13.333">Author:</TextBlock>
+                    <TextBlock Margin="90,55,0,0" FontSize="13.333">Patric Vormstein</TextBlock>
+
+                    <TextBlock Margin="20,80,0,0" FontWeight="Bold" FontSize="13.333">License:</TextBlock>
+                    <TextBlock Margin="90,80,0,0" FontSize="13.333">MIT-License (Open Source)</TextBlock>
+
+                    <TextBlock Margin="20,105,0,0" FontWeight="Bold" FontSize="13.333">Repository:</TextBlock>
+                    <TextBlock Margin="105,105,0,0" FontSize="13.333">           
+                        <Hyperlink NavigateUri="https://github.com/pvormste/RocketLeagueReplay-Jsonizer" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF66BAF1">
+                            GitHub
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <TextBlock Margin="20,160,0,0" FontSize="18.667">credits</TextBlock>
+                    <TextBlock Margin="20,200,0,0" FontWeight="Bold" FontSize="13.333">           
+                        <Hyperlink NavigateUri="https://github.com/jjbott/RocketLeagueReplayParser" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF66BAF1">
+                            Rocket League Replay Parser
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="30,220,0,0" FontSize="13.333">by</TextBlock>
+                    <TextBlock Margin="50,220,0,0" FontSize="13.333">           
+                        <Hyperlink NavigateUri="https://github.com/jjbott" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF66BAF1">
+                            jjbot
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <TextBlock Margin="20,245,0,0" FontWeight="Bold" FontSize="13.333">           
+                        <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF66BAF1">
+                            mahapps.metro
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="30,265,0,0" FontSize="13.333">by</TextBlock>
+                    <TextBlock Margin="50,265,0,0" FontSize="13.333">           
+                        <Hyperlink NavigateUri="https://github.com/MahApps" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF66BAF1">
+                            MahApps
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <TextBlock Margin="20,290,0,0" FontWeight="Bold" FontSize="13.333">           
+                        Logo Idea
+                    </TextBlock>
+                    <TextBlock Margin="30,310,0,0" FontSize="13.333">by</TextBlock>
+                    <TextBlock Margin="50,310,0,0" FontSize="13.333">           
+                        Benjamin Lossau
+                    </TextBlock>
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
     <Grid Background="#FF252525">
         <TextBox x:Name="txtBoxJSON" HorizontalAlignment="Left" Height="183" Margin="10,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="590"/>
         <Label x:Name="label" Content="JSON-Output:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="102" Height="25" />
@@ -48,7 +104,5 @@
         <CheckBox x:Name="chckMatchInfo" Content="Extract match infos only (uncheck not possible / not implemented)" HorizontalAlignment="Left" Margin="11,140,0,0" VerticalAlignment="Top" Width="389" IsChecked="True" IsEnabled="False"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="93" Margin="135,18,0,0" VerticalAlignment="Top" Width="360" Source="Resources/program-logo.png"/>
         <Button x:Name="btnGenerate" Content="Generate" HorizontalAlignment="Left" Margin="489,279,0,0" VerticalAlignment="Top" Width="111" Background="#FF2F2F2F" Height="32" FontSize="12" Click="btnGenerate_Click"/>
-
-
     </Grid>
 </Controls:MetroWindow>
